@@ -2,7 +2,7 @@ const util = require('util');
 const fs = require('fs');
 
 // Unique ID generator taken from npm : https://www.npmjs.com/package/uuid
-const uuid = require('uuid/v1');
+const uuidv1 = require('uuid/v1');
 
 // Promise version of fs.readFile/fs.writeFile
 const readFilePromise = util.promisify(fs.readFile);
@@ -31,24 +31,24 @@ class Update {
     }
 
 
-addNote(note) {
-    const {title, text} = note;
+    addNote(note) {
+        const { title, text } = note;
 
-    if (!title || !text) {
-        throw new Error("No title or text detected, please provide.");
+        if (!title || !text) {
+            throw new Error("No title or text detected, please provide.");
+        }
+        const newNote = { title, text, id: uuid() };
+
+        return this.grabNotes()
+            .then((notes) => [...notes, newNote])
+            .then((updatedNotes) => this.write(updatedNotes))
+            .then(() => newNote);
     }
-    const newNote = {title, text, id: uuid()};
-
-    return this.grabNotes()
-    .then((notes) => [...notes, newNote])
-    .then((updatedNotes) => this.write(updatedNotes))
-    .then(() => newNote);
-}
-removeNote(id) {
-    return this.grabNotes()
-    .then((notes) => notes.filter((note) => note.id !== id))
-    .then((sortedNotes) => this.write(sortedNotes));
-}
+    removeNote(id) {
+        return this.grabNotes()
+            .then((notes) => notes.filter((note) => note.id !== id))
+            .then((sortedNotes) => this.write(sortedNotes));
+    }
 }
 
 module.exports = new Update();
