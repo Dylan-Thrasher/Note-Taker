@@ -3,6 +3,13 @@ const updater = require('../db/update');
 
 // take the created class of update and convert to json
 app.get('/notes', (req,res) => {
+    updater.grabNotes()
+    .then((note) => {
+        res.json(note)
+    })
+})
+
+app.post('/notes', (req,res) => {
     updater.addNote(req.body)
     .then((note) => {
         res.json(note)

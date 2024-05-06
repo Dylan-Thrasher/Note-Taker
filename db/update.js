@@ -2,7 +2,7 @@ const util = require('util');
 const fs = require('fs');
 
 // Unique ID generator taken from npm : https://www.npmjs.com/package/uuid
-const uuidv1 = require('uuid/v1');
+const uuid = require('uuid/v1');
 
 // Promise version of fs.readFile/fs.writeFile
 const readFilePromise = util.promisify(fs.readFile);
