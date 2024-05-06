@@ -9,6 +9,7 @@ app.get('/notes', (req,res) => {
     })
 })
 
+// adds a note to the json array
 app.post('/notes', (req,res) => {
     updater.addNote(req.body)
     .then((note) => {
