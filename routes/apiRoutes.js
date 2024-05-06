@@ -1,5 +1,5 @@
 const app = require('express').Router();
-const updater = require('../public/assets/js/update');
+const updater = require('../db/update');
 
 // take the created class of update and convert to json
 app.get('/notes', (req,res) => {
