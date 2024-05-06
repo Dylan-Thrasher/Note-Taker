@@ -11,10 +11,10 @@ const writeFilePromise = util.promisify(fs.writeFile);
 // Class to read and write additions to the array of notes
 class Update {
     read() {
-        return readFilePromise('.../db/db.json', 'utf8');
+        return readFilePromise('db/db.json', 'utf8');
     }
     write(note) {
-        return writeFilePromise('.../db/db.json', JSON.stringify(note));
+        return writeFilePromise('db/db.json', JSON.stringify(note));
     }
     // gathers the notes
     grabNotes() {
